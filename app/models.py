@@ -1,4 +1,5 @@
 from . import db
+from datetime import datetime
 
 class Comment(db.Model):
     __tables__ = 'comments'
@@ -49,7 +50,7 @@ class User(db.Model):
                                lazy='dynamic',
                                cascade='all, delete-orphan')
     follower = db.relationship('Follow',
-                               foreign_keys=[Follow.follwed_id],
+                               foreign_keys=[Follow.followed_id],
                                backref=db.backref('followed', lazy='joined'),
                                lazy='dynamic',
                                cascade='all, delete-orphan')
