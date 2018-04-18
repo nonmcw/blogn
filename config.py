@@ -3,6 +3,7 @@ import os
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SERVER = 'smtp.163.com'
     MAIL_PORT = 25
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
@@ -12,7 +13,7 @@ class Config(object):
     BLOGN_ADMIN = 'nonmcw@126.com'
 
     @staticmethod
-    def init_app():
+    def init_app(app):
         pass
 
 class DevelopmentConfig(Config):

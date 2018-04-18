@@ -1,7 +1,8 @@
+from datetime import datetime
 from . import db
 
 class Comment(db.Model):
-    __tables__ = 'comments'
+    __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
@@ -11,13 +12,13 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
     
 class Follow(db.Model):
-    __tables__ = 'follows'
-    follower_id = db.Column(db.Integer, db.ForeignKey('User.id'), primary_key=True)
-    followed_id = db.Column(db.Integer, db.ForeignKey('User.id'), primary_key=True)
+    __tablename__ = 'follows'
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     
 class Role(db.Model):
-    __tables__ = 'roles'
+    __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), unique=True)
     default_role = db.Column(db.Boolean, default=False, index=True)
@@ -37,7 +38,7 @@ class User(db.Model):
     avatar = db.Column(db.String(32))
     name = db.Column(db.String(64), index=True)
     phone = db.Column(db.String(16), unique=True)
-    about_me = db.Column(db.Text(), unique=True)
+    about_me = db.Column(db.Text())
     location = db.Column(db.String(256), nullable=True)
     member_since = db.Column(db.DateTime(), default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
@@ -49,7 +50,7 @@ class User(db.Model):
                                lazy='dynamic',
                                cascade='all, delete-orphan')
     follower = db.relationship('Follow',
-                               foreign_keys=[Follow.follwed_id],
+                               foreign_keys=[Follow.followed_id],
                                backref=db.backref('followed', lazy='joined'),
                                lazy='dynamic',
                                cascade='all, delete-orphan')
