@@ -1,6 +1,5 @@
 from datetime import datetime
 from . import db
-from datetime import datetime
 
 class Comment(db.Model):
     __tablename__ = 'comments'
