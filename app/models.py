@@ -1,5 +1,6 @@
 from datetime import datetime
 from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -55,6 +56,17 @@ class User(db.Model):
                                lazy='dynamic',
                                cascade='all, delete-orphan')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
+
+    @property
+    def password(self):
+        return AttributeError('password is a not readable attribute')
+
+    @password.setter
+    def password(self, password):
+        self.pass_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.pass_hash, password)
     
     def __repr__():
         return '<User %r>' % self.username

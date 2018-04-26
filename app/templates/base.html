@@ -4,8 +4,8 @@
 
 {% block head %}
 {{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='fav.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='fav.ico') }}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 {% endblock %}
 
@@ -19,12 +19,31 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="{{ url_for('main.index') }}">BLOGN</a>
+               <a class="navbar-brand" href="{{ url_for('main.index') }}">
+                   <img alt="Brand" length="30px" width="30px" style="margin-top: -5px;" src="../static/nl-logo.png">
+               </a>
           </div>
           <div class="navbar-collapse collapse">
                <ul class="nav navbar-nav">
-                   <li class="active"><a href="{{ url_for('main.index') }}">Home</a></li>
+                   <li><a href="{{ url_for('main.index') }}">Home</a></li>
                    <li><a href="{{ url_for('main.index') }}">IPv6</a></li>
+               </ul>
+               <ul class="nav navbar-nav navbar-right">
+                   {% if current_user.is_authenticated %}
+                   <li class="dropdown">
+                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                           <img src="{{ current_user.gravatar(size=18) }}">
+                           Accont<b class="caret"></b>
+                       </a>
+                       <ul class="dropdown-menu">
+                           <li><a href="{{ url_for('auth.change_password') }}">Change Password</a></li>
+                           <li><a href="{{ url_for('auth.change_email_request') }}">Change email</a></li>
+                           <li><a href="{{ url_for('auth.change_password') }}">Log Out</a></li>
+                       </ul>
+                   </li>
+                   {% else %}
+                   <button type="button" class="btn btn-default">Log In</button>
+                   {% endif %}
                </ul>
           </div>
      </div>
