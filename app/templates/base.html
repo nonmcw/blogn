@@ -20,10 +20,10 @@
                     <span class="icon-bar"></span>
                </button>
                <a class="navbar-brand" href="{{ url_for('main.index') }}">
-                   <img alt="Brand" length="30px" width="30px" style="margin-top: -5px;" src="../static/nl-logo.png">
+                    <img alt="Brand" width="30px" height="30px" style="margin-top: -5px;" src="../static/nl-logo.png">
                </a>
           </div>
-          <div class="navbar-collapse collapse">
+          <div id="navbar" class="navbar-collapse collapse">
                <ul class="nav navbar-nav">
                    <li><a href="{{ url_for('main.index') }}">Home</a></li>
                    <li><a href="{{ url_for('main.index') }}">IPv6</a></li>
@@ -42,7 +42,7 @@
                        </ul>
                    </li>
                    {% else %}
-                   <button type="button" class="btn btn-default">Log In</button>
+                   <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
                    {% endif %}
                </ul>
           </div>
