@@ -4,6 +4,11 @@
 
 {% block title %}Blog - Login{% endblock %}
 
-{% block page_connext %}
-    {{ wtf.quick_form(form) }}
+{% block page_content %}
+<div class="form-signin">
+    {{ wtf.form_field(form.email, placeholder="you@domain.com") }}
+    {{ wtf.form_field(form.password, placeholder="You Password") }}
+    {{ wtf.form_field(form.remember_me) }}
+    {{ wtf.form_field(form.submit, class="btn btn-lg btn-success btn-block") }}
+</div>
 {% endblock %}
