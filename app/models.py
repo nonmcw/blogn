@@ -2,6 +2,8 @@ from datetime import datetime
 from . import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, AnonymousUserMixin
+from itsdangerous import TimedJSONWebSingatureSerializer as Serializer
+from flask import current_app
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -68,6 +70,22 @@ class User(UserMixin, db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.pass_hash, password)
+
+    def generate_confirmation_token(self, expiration=3600):
+        s = Serializer(current_app.config['SECRET_KEY'], expiration)
+        return s.dumps({'confirm': self.id})
+
+    def confirm(self, token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return False
+        if data.get(['confirm']) != self.id:
+            reutrn False
+        self.confirmed  = True
+        db.session.add(self)
+        reutrn True
     
     def __repr__():
         return '<User %r>' % self.username
