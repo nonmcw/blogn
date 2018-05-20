@@ -2,7 +2,7 @@ from datetime import datetime
 from . import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, AnonymousUserMixin
-from itsdangerous import TimedJSONWebSingatureSerializer as Serializer
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
 
 class Comment(db.Model):
@@ -62,7 +62,7 @@ class User(UserMixin, db.Model):
 
     @property
     def password(self):
-        return AttributeError('password is a not readable attribute')
+        raise AttributeError('password is a not readable attribute')
 
     @password.setter
     def password(self, password):
@@ -82,10 +82,10 @@ class User(UserMixin, db.Model):
         except:
             return False
         if data.get(['confirm']) != self.id:
-            reutrn False
+            return False
         self.confirmed  = True
         db.session.add(self)
-        reutrn True
+        return True
     
     def __repr__():
         return '<User %r>' % self.username

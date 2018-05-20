@@ -20,10 +20,10 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('register')
 
     def validate_email(self, field):
-          if User.query.filter_by(email=field.data).first():
-               return ValidationError('Email areldy registered')
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('Email areldy registered')
 
 
     def validate_username(self, field):
-          if User.query.filter_by(username=field.data).first():
-               return ValidationError('username areldy registered')
+        if User.query.filter_by(username=field.data).first():
+            raise ValidationError('username areldy registered')

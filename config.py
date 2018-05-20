@@ -4,11 +4,11 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    MAIL_SERVER = 'smtp.163.com'
+    MAIL_SERVER = 'smtp.126.com'
     MAIL_PORT = 25
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    BLOGN_MAIL_SUBJECT_PERFIX = '[Blogn]'
+    BLOGN_MAIL_SUBJECT_PREFIX = '[Blogn]'
     BLOGN_MAIL_SENDER = 'Blogn Admin<nonmcw@126.com>'
     BLOGN_ADMIN = 'nonmcw@126.com'
 

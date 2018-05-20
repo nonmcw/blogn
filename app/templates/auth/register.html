@@ -5,12 +5,15 @@
 {% block title %}Blog - Register{% endblock %}
 
 {% block page_content %}
-<div class="form-signin">
+<!--<div class="form-signin">
     {{ wtf.form_field(form.email, placeholder="you@domain.com") }}
     {{ wtf.form_field(form.username, placeholder="username") }}
     {{ wtf.form_field(form.password, placeholder="password") }}
     {{ wtf.form_field(form.password2, placeholder="comfirm password") }}
     {{ wtf.form_field(form.submit, class="btn btn-lg btn-success btn-block") }}
+</div>-->
+<div class="form-signin">
+    {{ wtf.quick_form(form) }}
 </div>
 {% endblock %}
 
