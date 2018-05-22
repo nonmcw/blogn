@@ -126,9 +126,27 @@ class User(UserMixin, db.Model):
         self.confirmed  = True
         db.session.add(self)
         return True
+
+    def can(self, permissions):
+        return self.role is not None and \
+                (self.role.permissions & permissions) == permissions
+
+    def is_administrator(self):
+        return self.can(Permission.ADMINISTER)
     
     def __repr__():
         return '<User %r>' % self.username
+
+
+class AnonymousUser(AnonymousUserMixin):
+    def can(self, permissions):
+        return False
+
+    def is_administrator(self):
+        return False
+
+login_manager.anonymous_user = AnonymousUser
+
 
 @login_manager.user_loader
 def load_user(user_id):
