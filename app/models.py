@@ -91,6 +91,15 @@ class User(UserMixin, db.Model):
                                cascade='all, delete-orphan')
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
+        if self.role is None:
+            if self.email == current_app.config['BLOGN_ADMIN']:
+                self.role = Role.query.filter_by(permissions=0xff).first()
+            if self.role is None:
+                self.role = Role.query.filter_by(default_role=True).first()
+
+
     @property
     def password(self):
         raise AttributeError('password is a not readable attribute')
