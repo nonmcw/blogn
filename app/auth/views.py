@@ -89,4 +89,4 @@ def change_password():
         return redirect(url_for('main.index'))
     else:
         flash('Invalid password')
-    return rend_template('auth/change_password.html', form=from)
+    return rend_template('auth/change_password.html', form=form)
