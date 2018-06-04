@@ -77,3 +77,16 @@ def resend_confirmation():
                'auth/email/confirm', user=current_user, token=token)
     flash('A new confirmation email has been sent to you by email.')
     return redirect(url_for('main.index'))
+
+@auth.route('/change-password')
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if current_user.verify_password(form.old_password.data):
+        current_user.password = form.password.data
+        db.commit.add(current_user)
+        flash('Your password has update.')
+        return redirect(url_for('main.index'))
+    else:
+        flash('Invalid password')
+    return rend_template('auth/change_password.html', form=from)
