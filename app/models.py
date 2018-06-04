@@ -132,6 +132,10 @@ class User(UserMixin, db.Model):
         db.session.add(self)
         return True
 
+    def generate_email_change_token(self, new_email, expiration=3600):
+        s = Serializer(current_app.secret_key['SECRET_KEY'], expiration)
+        return s.dumps({'change_email': self.id, 'new_email': new_email})
+
     def change_email(self, token):
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
@@ -159,7 +163,7 @@ class User(UserMixin, db.Model):
         return self.can(Permission.ADMINISTER)
 
     def ping(self):
-        self.last_seen = DateTime.utcnow()
+        self.last_seen = datetime.utcnow()
         db.session.add(self)
 
     def gravatar(self, size=100, default='idention', rating='g'):
