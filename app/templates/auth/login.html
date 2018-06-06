@@ -2,16 +2,18 @@
 
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Blog - Login{% endblock %}
+{% block title %}login{% endblock %}
 
 {% block page_content %}
-<!--<div class="form-signin">
+<form class="form-signin" method="POST">
+    {{ form.hidden_tag() }}
     {{ wtf.form_field(form.email, placeholder="you@domain.com") }}
     {{ wtf.form_field(form.password, placeholder="You Password") }}
     {{ wtf.form_field(form.remember_me) }}
     {{ wtf.form_field(form.submit, class="btn btn-lg btn-success btn-block") }}
+</form>
+<!--<div class="form-signin">
+     wtf.form_field(form.submit, class="btn btn-lg btn-success btn-block")
+     wtf.quick_form(form) 
 </div>-->
-<div class="form-signin">
-    {{ wtf.quick_form(form) }}
-</div>
 {% endblock %}
