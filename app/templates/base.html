@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block navbar %}
+<div class="navbar navbar-default"></div>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
           <div class="navbar-header">
@@ -21,9 +22,9 @@
                </button>
                <a class="navbar-brand" href="{{ url_for('main.index') }}">
                     <img alt="Brand" width="30px" height="30px" style="margin-top: -5px;" src="../static/nl-logo.png">
-               </a>
+              </a>
           </div>
-          <div id="navbar" class="navbar-collapse collapse">
+          <div class="navbar-collapse collapse">
                <ul class="nav navbar-nav">
                    <li><a href="{{ url_for('main.index') }}">Home</a></li>
                    <li><a href="{{ url_for('main.index') }}">IPv6</a></li>

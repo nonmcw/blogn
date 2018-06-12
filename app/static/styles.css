@@ -1,7 +1,7 @@
 .form-signin {
     max-width: 330px;
     padding: 15px;
-    margin: 150px auto;
+    margin: 100px auto;
 }
 
 .form-signin .form-control {
@@ -9,3 +9,5 @@
     padding: 10px;
     font-size: 16px;
 }
+
+
