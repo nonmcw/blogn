@@ -19,6 +19,11 @@ def index():
     posts = pagination.items
     return render_template('index.html', form=form, posts=posts, pagination=pagination)
 
+
+@main.route('/about', methods=['GET',])
+def about():
+    return render_template('about.html')
+
 @main.route('/user/<username>')
 def user(username):
     user = User.query.filter_by(username=username).first()
@@ -38,7 +43,7 @@ def edit_profile():
         currnet_user.location = form.location.data
         current_user.about_me = form.about_me.data
         db.session.add(current_user)
-        flash('Your profile has been updated.')
+        flash('你的信息已更新.')
         return redirect(url_for('.user', username=current_user.username))
     form.name.data = current_user.name
     form.phone.data = current_user.phone
@@ -62,7 +67,7 @@ def edit_profile_admin(id):
         user.location = form.location.data
         user.about_me = form.about_me.data
         db.session.add(user)
-        flash('The profile has been updated!')
+        flash('信息已更新!')
         return redirect(url_for('.user', username=user.username))
     form.email.data = user.email
     form.username.data = user.username

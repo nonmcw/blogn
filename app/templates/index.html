@@ -6,7 +6,7 @@
 
 {% block page_content %}
 <div class="page-header">
-     <h1>Hello, {% if current_user.authenticated %}{{ current_user.username }}{% else %}Welcome{% endif %}!</h1>
+     <h4>欢迎来到我的个人主页。最近将学习的IPv6相关知识整理出来，然后测试。如果您也对IPv6这个还未大规模应用的协议感兴趣，加入我们......</h4>
 </div>
 <div>
     {% if current_user.can(Permission.WRITE_ARTICLES) %}
