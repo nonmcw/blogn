@@ -19,6 +19,18 @@ def index():
     posts = pagination.items
     return render_template('index.html', form=form, posts=posts, pagination=pagination)
 
+@main.route('/ip6', methods=['GET','POST'])
+def ip6():
+    form = PostForm()
+    if current_user.can(Permission.WRITE_ARTICLES) and form.validate_on_submit():
+        post = Post(body=form.body.data, tag='IPv6', author=current_user._get_current_object())
+        db.session.add(post)
+        return redirect(url_for('.ip6'))
+    page = request.args.get('page', 1, type=int)
+    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page, error_out=False)
+    posts = pagination.items
+    return render_template('ip6.html', form=form, posts=posts, pagination=pagination)
+
 
 @main.route('/about', methods=['GET',])
 def about():
