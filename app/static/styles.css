@@ -59,9 +59,13 @@ div.post-thumbnail {
 
 div.post-content {
     margin-left: 58px;
-    min-height: 108px;
-    max-height: 108px;
-    overflow: hidden;
+    min-height: 58px;
+}
+
+div.post-body {
+    height: 118px;
+    line-height: 26px;
+     overflow: hidden;
 }
 
 div.post-footer {
