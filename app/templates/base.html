@@ -46,7 +46,6 @@
                    {% else %}
                    <li><a href="{{ url_for('auth.login') }}">登陆</a></li>
                    <!--<li><a href="{{ url_for('auth.register') }}">Register</a></li>i-->
-                   <li><a href="{{ url_for('main.about') }}">关于我</a></li>
                    {% endif %}
                </ul>
           </div>
@@ -65,4 +64,11 @@
 
     {% block page_content %}{% endblock %}
 </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="footer">
+        <a href="www.miitbeian.gov.cn">冀ICP备11002688-4&nbsp</a>
+        <a href="{{ url_for('main.about') }}">&nbsp关于我</a>
+    </div>
 {% endblock %}
